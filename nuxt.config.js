@@ -1,4 +1,35 @@
 export default {
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push(
+        {
+          path: '/',
+          name: 'Main',
+          component: resolve(__dirname, 'components/Layout/Main.vue')
+        },
+        {
+          path: '/login',
+          name: 'Login',
+          component: resolve(__dirname, 'components/Auth/Login.vue')
+        },
+        {
+          path: '/register',
+          name: 'Register',
+          component: resolve(__dirname, 'components/Auth/Register.vue')
+        },
+      )
+    }
+  },
+
+  publicRuntimeConfig: {
+    BASE_URL: process.env.BASE_URL,
+    NODE_ENV: process.env.NODE_ENV,
+  },
+
+  privateRuntimeConfig: {
+
+  },
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -33,7 +64,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -45,6 +76,29 @@ export default {
   },
   
   generate: {
-    fallback: true
+    fallback: true,
+    routes: [
+      '/'
+    ]
+  },
+  
+  axios: {
+    baseURL: process.env.BASE_URL+':'+process.env.PORT+'/'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/user/login', method: 'post', propertyName: 'data.token' },
+          user: { url: '/user/me', method: 'get', propertyName: 'data.users' },
+          logout: { url: '/user/get/id', method: 'post', propertyName: 'data' }
+        }
+      }
+    }
+  },
+
+  server: {
+    port: process.env.PORT // default: 3000
   },
 }
