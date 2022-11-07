@@ -10,9 +10,9 @@
           </a>
         </div>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <div class="inline-flex items-stretch rounded-md bg-white">
+          <div class="inline-flex items-stretch rounded-md bg-white"  v-if="isAuthenticated">
             <button class="rounded-l-md px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700" @click="flag.dropdown=!flag.dropdown">
-              My Account
+              {{ loggedInUser[0].firstName }}
             </button>
 
             <div class="relative">
@@ -54,11 +54,13 @@
             </div>
           </div>
 
-          <nuxt-link class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" to="/register">
-            Register</nuxt-link>
-          <nuxt-link
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            to="/login">Log In</nuxt-link>
+          <div v-else>
+            <nuxt-link class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" to="/register">
+              Register</nuxt-link>
+            <nuxt-link
+              class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              to="/login">Log In</nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -66,9 +68,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: "HeaderComp",
   components: {},
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  }, 
   data() {
     return {
       flag: {

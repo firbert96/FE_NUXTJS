@@ -156,18 +156,17 @@ export default {
           password: this.password
         })
 
-        if(register) {
-          return this.$swal("Success!", register, "success");
-        }
-
         await this.$auth.loginWith('local', {
           data: {
           email: this.email,
           password: this.password
           },
         })
-        
-        this.$router.push('/')
+
+        if(register) {
+          this.$swal("Success!", register, "success");
+          this.$router.push('/')
+        }
       } catch (e) {
         return this.$swal("Failed!", e, "error");
       }

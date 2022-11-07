@@ -4,8 +4,8 @@ export default {
       routes.push(
         {
           path: '/',
-          name: 'Main',
-          component: resolve(__dirname, 'components/Layout/Main.vue')
+          name: 'Index',
+          component: resolve(__dirname, 'pages/index.vue')
         },
         {
           path: '/login',
