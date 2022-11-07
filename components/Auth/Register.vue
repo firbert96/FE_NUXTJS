@@ -21,8 +21,7 @@
           >
             Register
           </h1>
-
-          <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+          <form method="post" @submit.prevent="register" class="mt-8 grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
               <label
                 for="FirstName"
@@ -35,6 +34,7 @@
                 type="text"
                 id="FirstName"
                 name="first_name"
+                v-model="firstName"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
@@ -51,6 +51,7 @@
                 type="text"
                 id="LastName"
                 name="last_name"
+                v-model="lastName"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
@@ -67,6 +68,7 @@
                 type="email"
                 id="Email"
                 name="email"
+                v-model="email"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
@@ -83,6 +85,7 @@
                 type="password"
                 id="Password"
                 name="password"
+                v-model="password"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
@@ -99,12 +102,13 @@
                 type="password"
                 id="PasswordConfirmation"
                 name="password_confirmation"
+                v-model="passwordConfirmation"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button
+              <button type="submit"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
               >
                 Create an account
@@ -127,6 +131,47 @@
 <script>
 export default {
   name: "Register",
-  components: {},
+  components: {
+
+  },
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    }
+  },
+  methods: {
+    async register() {
+      try {
+        if(this.password !== this.passwordConfirmation) {
+          return this.$swal("Failed!", `Password isn't match`, "error");
+        }
+        const register = await this.$axios.post('/user/add', {
+          firstName: this.firstName,
+          lastName:this.lastName,
+          email: this.email,
+          password: this.password
+        })
+
+        if(register) {
+          return this.$swal("Success!", register, "success");
+        }
+
+        await this.$auth.loginWith('local', {
+          data: {
+          email: this.email,
+          password: this.password
+          },
+        })
+        
+        this.$router.push('/')
+      } catch (e) {
+        return this.$swal("Failed!", e, "error");
+      }
+    }
+  }
 };
 </script>

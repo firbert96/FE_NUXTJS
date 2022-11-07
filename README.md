@@ -70,5 +70,5 @@ More information about the usage of this directory in [the documentation](https:
 
 ### Source
 - https://medium.appbase.io/getting-started-with-vue-and-nuxt-js-part-1-of-11-b694b23679c5
-- https://www.hyperui.dev/components/
+- https://www.hyperui.dev/components/application-ui
 - https://www.digitalocean.com/community/tutorials/implementing-authentication-in-nuxtjs-app

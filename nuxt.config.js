@@ -69,6 +69,9 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    "vue-sweetalert2/nuxt"
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -83,7 +86,7 @@ export default {
   },
   
   axios: {
-    baseURL: process.env.BASE_URL+':'+process.env.PORT+'/'
+    baseURL: process.env.BASE_URL_BACKEND+':'+process.env.PORT_BACKEND+'/api/v1'
   },
 
   auth: {
