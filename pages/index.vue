@@ -1,14 +1,16 @@
 <template>
-  <div class="flex flex-col h-screen justify-between px-[20%]">
-    <header>
-      <HeaderComp/>
-    </header>
-    <main class="mb-auto">
-      <MainComp/>
-    </main>
-    <footer>
-      <FooterComp/>
-    </footer>
+  <div>
+    <BaseLayout>
+      <template v-slot:header>
+        <HeaderComp/>
+      </template>
+      <template v-slot >
+        <MainComp />
+      </template>
+      <template v-slot:footer>
+        <FooterComp/>
+      </template>
+    </BaseLayout>
   </div>
 </template>
 
@@ -16,12 +18,14 @@
   import HeaderComp from '../components/Layout/Header.vue';
   import FooterComp from '../components/Layout/Footer.vue';
   import MainComp from '../components/Layout/Main.vue';
+  import BaseLayout from '../components/Layout/BaseLayout.vue';
   export default {
     name:"Index",
     components:{
       HeaderComp,
       FooterComp,
       MainComp,
+      BaseLayout,
     },
   }
 </script>

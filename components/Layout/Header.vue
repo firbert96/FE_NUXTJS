@@ -40,13 +40,11 @@
                     </div>
 
                     <div class="p-2">
-                      <form method="POST" action="#">
-                        <button type="submit"
-                          class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                          role="menuitem">
-                          Logout
-                        </button>
-                      </form>
+                      <button
+                        class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                        role="menuitem" @click="logout">
+                        Logout
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -82,6 +80,11 @@ export default {
       },
     }
   },
-  methods:{},
+  methods:{
+    async logout() {
+      await this.$auth.logout();
+      this.$router.push('/login');
+    },
+  },
 };
 </script>

@@ -167,6 +167,9 @@ export default {
           this.$swal("Success!", register, "success");
           this.$router.push('/')
         }
+        else {
+          this.$swal("Error!", register, "error");
+        }
       } catch (e) {
         return this.$swal("Failed!", e, "error");
       }

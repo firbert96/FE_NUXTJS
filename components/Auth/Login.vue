@@ -32,7 +32,7 @@
             </h1>
           </div>
 
-          <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+          <form method="post" @submit.prevent="login" class="mt-8 grid grid-cols-6 gap-6">
             <div class="col-span-6">
               <label
                 for="Email"
@@ -45,6 +45,7 @@
                 type="email"
                 id="Email"
                 name="email"
+                v-model="email"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
@@ -61,12 +62,13 @@
                 type="password"
                 id="Password"
                 name="password"
+                v-model="password"
                 class="mt-1 w-full h-8 rounded-md shadow-sm shadow-indigo-500/50"
               />
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button
+              <button type="submit"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
               >
                 Login
@@ -90,5 +92,33 @@
 export default {
   name: "Login",
   components: {},
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        const login = await this.$auth.loginWith('local', {
+          data: {
+          email: this.email,
+          password: this.password
+          }
+        })
+console.log(login)
+        if(login) {
+          this.$swal("Success!", login, "success");
+          this.$router.push('/')
+        }
+        else {
+          this.$swal("Error!", login, "error");
+        }
+      } catch (e) {
+        return this.$swal("Failed!", e, "error");
+      }
+    }
+  }
 };
 </script>
