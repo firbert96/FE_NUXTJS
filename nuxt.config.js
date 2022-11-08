@@ -1,25 +1,4 @@
 export default {
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push(
-        {
-          path: '/',
-          name: 'Index',
-          component: resolve(__dirname, 'pages/index.vue')
-        },
-        {
-          path: '/login',
-          name: 'Login',
-          component: resolve(__dirname, 'components/Auth/Login.vue')
-        },
-        {
-          path: '/register',
-          name: 'Register',
-          component: resolve(__dirname, 'components/Auth/Register.vue')
-        },
-      )
-    }
-  },
 
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL,

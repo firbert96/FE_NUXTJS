@@ -4,17 +4,17 @@
 
 ```bash
 # install dependencies
-$ npm install
+$ yarn
 
 # serve with hot reload at localhost:3000
-$ npm run dev
+$ yarn dev
 
 # build for production and launch server
-$ npm run build
-$ npm run start
+$ yarn build
+$ yarn start
 
 # generate static project
-$ npm run generate
+$ yarn generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
@@ -72,3 +72,4 @@ More information about the usage of this directory in [the documentation](https:
 - https://medium.appbase.io/getting-started-with-vue-and-nuxt-js-part-1-of-11-b694b23679c5
 - https://www.hyperui.dev/components/application-ui
 - https://www.digitalocean.com/community/tutorials/implementing-authentication-in-nuxtjs-app
+- https://www.youtube.com/watch?v=0ioT7Q7kkVc&ab_channel=DebbieO%27Brien
