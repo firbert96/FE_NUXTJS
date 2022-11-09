@@ -1,5 +1,9 @@
 # FE_NUXTJS
 
+## Make .env file
+- touch .env
+- copy .env.example to .env
+
 ## Build Setup
 
 ```bash
